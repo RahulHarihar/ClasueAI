@@ -60,15 +60,32 @@ If the primary model is unavailable, the service catches access/capacity errors 
 
 ```
 contract-negotiator/
-├── index.ts              # Bun.serve() — static UI routing & API endpoints
-├── index.html            # Entry HTML shell — loads frontend.tsx natively
-├── frontend.tsx          # React interface (upload, status, conflict cards)
-├── index.css             # Vanilla styles & risk badges
-├── services/
-│   ├── pdfParser.ts      # PDF text extraction & clause segmentation
-│   └── geminiService.ts  # Gemini API integration with model fallback
-├── tsconfig.json         # Strict TypeScript config (DOM + ESNext)
-└── .env                  # Environment variables (GEMINI_API_KEY)
+├── backend/
+│   ├── index.ts              # Bun.serve() — /api/negotiate & /api/health with CORS
+│   ├── services/
+│   │   ├── geminiService.ts  # Gemini API integration with model fallback
+│   │   └── pdfParser.ts      # PDF text extraction & clause segmentation
+│   ├── package.json          # Backend runtime & dependencies
+│   ├── tsconfig.json         # Backend TypeScript config
+│   ├── render.yaml           # Render deployment blueprint
+│   └── .env.example          # GEMINI_API_KEY, GEMINI_MODEL, FRONTEND_URL
+├── frontend/
+│   ├── app/
+│   │   ├── layout.tsx        # Next.js App Router root layout & dark theme
+│   │   ├── page.tsx          # Main upload & analysis dashboard
+│   │   └── globals.css       # Tailwind CSS directives
+│   ├── components/
+│   │   ├── UploadForm.tsx    # PDF upload form connecting to backend API
+│   │   ├── ConflictCard.tsx  # Clause comparison card with risk badges
+│   │   └── LoadingState.tsx  # Spinner & cold-start notice
+│   ├── types/
+│   │   └── index.ts          # Conflict and AnalysisResult TypeScript types
+│   ├── next.config.ts        # Next.js configuration
+│   ├── package.json          # Frontend dependencies (Next.js, Tailwind, React 19)
+│   ├── tsconfig.json         # Frontend TypeScript config
+│   └── .env.example          # NEXT_PUBLIC_API_URL
+├── PROJECT_CONTEXT.md
+└── AGENT_INSTRUCTIONS.md
 ```
 
 ---
@@ -79,33 +96,27 @@ contract-negotiator/
 
 * [Bun](https://bun.sh/) (v1.1+ or v1.3+)
 
-### 1. Clone & Install
+### 1. Run the Backend (Render / Bun)
 
 ```bash
-git clone https://github.com/RahulHarihar/contract-negotiator.git
-cd contract-negotiator
+cd backend
 bun install
-```
-
-### 2. Configure Environment
-
-Create a `.env` file in the root directory:
-
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-GEMINI_MODEL=gemini-3.6-flash
-PORT=3000
-```
-
-> Get an API key from [Google AI Studio](https://aistudio.google.com/).
-
-### 3. Run Development Server
-
-```bash
+cp .env.example .env # Add your GEMINI_API_KEY
 bun --hot index.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Backend runs at [http://localhost:3000](http://localhost:3000).
+
+### 2. Run the Frontend (Vercel / Next.js)
+
+```bash
+cd frontend
+bun install
+cp .env.example .env.local # Set NEXT_PUBLIC_API_URL=http://localhost:3000
+bun run dev -- -p 3001
+```
+
+Open [http://localhost:3001](http://localhost:3001) in your browser.
 
 ---
 
@@ -146,8 +157,14 @@ Returns health status:
 
 ## Verification & Testing
 
-Verify TypeScript compiles cleanly:
+Verify TypeScript compiles cleanly across both packages:
 
 ```bash
+# Typecheck backend
+cd backend
 bun x tsc --project tsconfig.json --pretty false
+
+# Typecheck frontend
+cd frontend
+bun x tsc --noEmit
 ```

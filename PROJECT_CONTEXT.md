@@ -6,24 +6,15 @@
 
 ## What This Project Is
 
-A Bun + React + TypeScript web application that lets a user upload two PDF contracts, extract clause text from each, and use AI to identify conflicts and suggest compromise language. The app runs as a single Bun process — no separate frontend server, no Express, no Vite.
+A full-stack contract negotiation assistant split into a **Next.js (App Router) frontend** and a **Bun API backend**:
+- **Frontend:** Next.js + React 19 + TypeScript + Tailwind CSS (deployed to Vercel with zero config).
+- **Backend:** Bun.serve() + TypeScript + PDF parsing + Gemini API (deployed to Render with Bun runtime).
 
 ---
 
-## Why This Exists — Two Goals
-
-### Goal 1: Land a job at Genie AI
-Genie AI (London, UK) is a legal AI startup backed by Google Ventures ($17.8M Series A). They build agentic contract drafting, review, and negotiation tools. This project is a working demo of a contract negotiation agent — a capability adjacent to but beyond what Genie AI currently ships. The plan is to cold email the CTO (Nitish Mutha) with a live demo link and a GitHub repo. The demo needs to be impressive, polished, and technically non-trivial.
-
-### Goal 2: Potential India product
-India's legaltech sector has 960 companies and raised $793M in funding with a 781% surge in 2025. The pain is real and validated:
-- 15M+ freelancers in India with no affordable contract protection
-- Indian freelance contracts routinely fail on TDS clauses, GST thresholds, and Section 44ADA
-- Most SMBs sign contracts they don't understand
-- Expensive lawyers (₹5,000–₹50,000 per contract review) are inaccessible to small businesses
-- Platforms like SpotDraft serve enterprises — nobody serves the freelancer and SMB market well
-
-If the product proves useful, it has a natural India market as a freemium SaaS targeting freelancers, early-stage startups, and small businesses.
+## Deployment Targets
+- **Frontend:** Vercel (root: `frontend/`)
+- **Backend:** Render (root: `backend/`, blueprint: `backend/render.yaml`)
 
 ---
 
@@ -31,15 +22,14 @@ If the product proves useful, it has a natural India market as a freemium SaaS t
 
 | Layer | Technology | Notes |
 |---|---|---|
-| Runtime | Bun | Not Node.js. Use bun, bun install, bun run |
-| Language | TypeScript | Strict mode. No any without justification |
-| Frontend | React 18 + TSX | Rendered via Bun's HTML import system |
-| Styling | Plain CSS | index.css. No CSS frameworks |
-| Server | Bun.serve() | No Express, no Fastify, no Hono |
-| PDF Parsing | pdf-parse | PDFParse class pattern |
-| AI | Gemini API (free tier) | Model fallback list — see below |
-| Environment | Bun native .env | No dotenv import anywhere |
-| Bundler | Bun native | No Vite, no Webpack, no esbuild |
+| Backend Runtime | Bun | Runs `backend/index.ts` with `Bun.serve()` |
+| Backend Language | TypeScript | Strict mode |
+| Frontend Framework| Next.js 15 (App Router) | Located in `frontend/`, deploys to Vercel |
+| Frontend Styling | Tailwind CSS | Dark theme (#0f0f0f, #1a1a1a) |
+| PDF Parsing | pdf-parse | In `backend/services/pdfParser.ts` |
+| AI Service | Google Gemini API | In `backend/services/geminiService.ts` |
+| Backend Hosting | Render | Configured via `backend/render.yaml` |
+| Frontend Hosting| Vercel | Zero-config Next.js deployment |
 
 ---
 
@@ -47,15 +37,38 @@ If the product proves useful, it has a natural India market as a freemium SaaS t
 
 ```
 contract-negotiator/
-├── index.ts              ← Bun.serve() — all routes live here
-├── index.html            ← HTML shell — imports frontend.tsx
-├── frontend.tsx          ← React UI — upload form + results
-├── index.css             ← All styles
-├── services/
-│   ├── pdfParser.ts      ← PDF extraction + clause splitting
-│   └── geminiService.ts  ← Gemini API call + model fallback
-├── tsconfig.json         ← Includes DOM + DOM.Iterable libs
-└── .env                  ← GEMINI_API_KEY and GEMINI_MODEL
+├── backend/
+│   ├── index.ts              ← Bun.serve() — /api/negotiate & /api/health with CORS
+│   ├── services/
+│   │   ├── geminiService.ts  ← Gemini API integration + model fallback loop
+│   │   └── pdfParser.ts      ← PDF text extraction & clause segmentation
+│   ├── package.json          ← Backend dependencies & scripts
+│   ├── tsconfig.json         ← Backend TypeScript configuration
+│   ├── render.yaml           ← Render deployment blueprint
+│   ├── .env.example          ← GEMINI_API_KEY, GEMINI_MODEL, FRONTEND_URL
+│   └── .env                  ← Local environment secrets (git ignored)
+├── frontend/
+│   ├── app/
+│   │   ├── layout.tsx        ← Root layout, metadata & dark background
+│   │   ├── page.tsx          ← Main dashboard page
+│   │   └── globals.css       ← Tailwind directives & root CSS variables
+│   ├── components/
+│   │   ├── UploadForm.tsx    ← Dual PDF upload form calling Render backend
+│   │   ├── ConflictCard.tsx  ← Conflict comparison card with risk badges
+│   │   └── LoadingState.tsx  ← Spinner + 3s cold start notification
+│   ├── types/
+│   │   └── index.ts          ← RiskLevel, Conflict, and AnalysisResult types
+│   ├── next.config.ts        ← Next.js configuration
+│   ├── package.json          ← Frontend dependencies (Next.js, Tailwind, React 19)
+│   ├── tsconfig.json         ← Frontend TypeScript configuration
+│   ├── tailwind.config.ts    ← Tailwind dark mode configuration
+│   ├── postcss.config.mjs    ← PostCSS configuration
+│   ├── .env.example          ← NEXT_PUBLIC_API_URL
+│   └── .env.local            ← Local dev API URL (git ignored)
+├── PROJECT_CONTEXT.md
+├── AGENT_INSTRUCTIONS.md
+├── README.md
+└── .gitignore
 ```
 
 ---
@@ -196,31 +209,50 @@ These are the clause categories the AI should prioritise flagging.
 
 ## Environment Variables
 
+### Backend (`backend/.env`)
 ```env
 GEMINI_API_KEY=<never log or expose this>
 GEMINI_MODEL=gemini-3.6-flash
+PORT=3000
+FRONTEND_URL=http://localhost:3001
 ```
 
-Bun loads `.env` automatically. Never import dotenv.
+### Frontend (`frontend/.env.local` / Vercel Environment)
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
 
 ---
 
 ## How to Run
 
+### Run Backend (Port 3000)
 ```bash
+cd backend
 bun install
 bun --hot index.ts
 ```
 
-Open `http://localhost:3000`
+### Run Frontend (Port 3001 or default 3000)
+```bash
+cd frontend
+bun install
+bun run dev -- -p 3001
+```
 
 ---
 
 ## How to Type Check
 
-```bash
-bun x tsc --project tsconfig.json --pretty false
-```
+Must exit with code 0 and zero errors in both directories:
 
-Must exit with code 0 and zero errors at all times.
+```bash
+# Type check backend
+cd backend
+bun x tsc --project tsconfig.json --pretty false
+
+# Type check frontend
+cd frontend
+bun x tsc --noEmit
+```
 
