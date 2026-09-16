@@ -146,7 +146,7 @@ Returns health status:
 
 ## Verification & Testing
 
-Verify TypeScript compilation cleanly:
+Verify TypeScript compiles cleanly:
 
 ```bash
 bun x tsc --project tsconfig.json --pretty false
