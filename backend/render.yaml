@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: contract-negotiator-api
+    runtime: node
+    buildCommand: bun install
+    startCommand: bun index.ts
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.6-flash
+      - key: FRONTEND_URL
+        sync: false

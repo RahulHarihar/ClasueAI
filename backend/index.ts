@@ -1,24 +1,34 @@
 import { extractTextFromPDF, extractClauses } from "./services/pdfParser";
 import { analyzeContracts } from "./services/geminiService";
-import index from "./index.html";
+
+const corsHeaders = {
+	"Access-Control-Allow-Origin": process.env.FRONTEND_URL || "*",
+	"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+	"Access-Control-Allow-Headers": "Content-Type",
+	"Content-Type": "application/json",
+};
 
 Bun.serve({
 	port: process.env.PORT || 3000,
 	routes: {
-		"/": index,
-
 		"/api/negotiate": {
+			OPTIONS: () =>
+				new Response(null, {
+					status: 204,
+					headers: corsHeaders,
+				}),
+
 			POST: async (req) => {
 				try {
 					const formData = await req.formData();
 
-					const contractA = formData.get("contractA") as File;
-					const contractB = formData.get("contractB") as File;
+					const contractA = formData.get("contractA") as File | null;
+					const contractB = formData.get("contractB") as File | null;
 
 					if (!contractA || !contractB) {
 						return new Response(
 							JSON.stringify({ error: "Both contracts are required" }),
-							{ status: 400, headers: { "Content-Type": "application/json" } },
+							{ status: 400, headers: corsHeaders },
 						);
 					}
 
@@ -39,31 +49,37 @@ Bun.serve({
 							JSON.stringify({
 								error: "Could not extract clauses from one or both contracts",
 							}),
-							{ status: 400, headers: { "Content-Type": "application/json" } },
+							{ status: 400, headers: corsHeaders },
 						);
 					}
 
-					// Analyze with Groq
+					// Analyze with Gemini
 					const analysis = await analyzeContracts(clausesA, clausesB);
 					const result = JSON.parse(analysis);
 
 					return new Response(JSON.stringify(result), {
-						headers: { "Content-Type": "application/json" },
+						headers: corsHeaders,
 					});
 				} catch (error) {
 					console.error("Negotiation error:", error);
 					return new Response(
 						JSON.stringify({ error: "Failed to analyze contracts" }),
-						{ status: 500, headers: { "Content-Type": "application/json" } },
+						{ status: 500, headers: corsHeaders },
 					);
 				}
 			},
 		},
 
 		"/api/health": {
+			OPTIONS: () =>
+				new Response(null, {
+					status: 204,
+					headers: corsHeaders,
+				}),
+
 			GET: () =>
 				new Response(JSON.stringify({ status: "ok" }), {
-					headers: { "Content-Type": "application/json" },
+					headers: corsHeaders,
 				}),
 		},
 	},
@@ -74,4 +90,4 @@ Bun.serve({
 	},
 });
 
-console.log("Contract Negotiator running on http://localhost:3000");
+console.log(`Contract Negotiator API running on http://localhost:${process.env.PORT || 3000}`);
