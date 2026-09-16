@@ -7,12 +7,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        serif: ["'DM Serif Display'", "serif"],
+        sans: ["'Inter'", "sans-serif"],
+      },
       colors: {
-        background: "#0f0f0f",
-        card: "#1a1a1a",
-        "card-border": "#2a2a2a",
-        subtle: "#888888",
-        clause: "#111111",
+        page: "#0c0c0c",
+        demo: "#0f0f0f",
+        card: "#141414",
+        border: "#1e1e1e",
       },
     },
   },
