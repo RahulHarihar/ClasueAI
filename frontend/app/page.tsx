@@ -98,29 +98,29 @@ export default function Home() {
     : [];
 
   return (
-    <div className="max-w-[1080px] mx-auto border-x border-[#222222] bg-[#0c0c0c] min-h-[calc(100vh-56px)] shadow-[0_0_80px_rgba(0,0,0,0.9)]">
+    <div className="max-w-[1080px] mx-auto border-x border-[#222838] bg-[#0e1117] min-h-[calc(100vh-56px)] shadow-[0_0_80px_rgba(0,0,0,0.8)]">
       {/* 1. Hero with 2-Column Balanced Layout */}
       <section className="px-6 sm:px-12 pt-16 sm:pt-20 pb-14 sm:pb-16 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
         {/* Left Column: Typography & Actions */}
         <div className="max-w-[540px] space-y-6">
-          <div className="inline-flex items-center gap-2.5 text-[11px] tracking-[0.14em] uppercase text-[#777] font-medium">
-            <div className="w-5 h-[1px] bg-[#3e3e3e]" />
+          <div className="inline-flex items-center gap-2.5 text-[11px] tracking-[0.14em] uppercase text-[#94a3b8] font-medium">
+            <div className="w-5 h-[1px] bg-[#475569]" />
             <span>Contract Intelligence</span>
-            <span className="text-[#444]">·</span>
-            <span className="text-[#666] normal-case tracking-normal font-light">
+            <span className="text-[#64748b]">·</span>
+            <span className="text-[#cbd5e1] normal-case tracking-normal font-normal">
               Powered by Gemini AI
             </span>
           </div>
 
-          <h1 className="font-serif text-[40px] sm:text-[56px] leading-[1.06] font-normal tracking-[-0.02em] text-[#f0ede8]">
+          <h1 className="font-serif text-[40px] sm:text-[56px] leading-[1.06] font-normal tracking-[-0.02em] text-[#f8fafc]">
             Two contracts.
             <br />
-            <em className="italic text-[#888]">One clear path</em>
+            <em className="italic text-[#cbd5e1]">One clear path</em>
             <br />
             forward.
           </h1>
 
-          <p className="text-[15px] sm:text-[15.5px] text-[#777] leading-[1.7] font-light">
+          <p className="text-[15px] sm:text-[15.5px] text-[#cbd5e1] leading-[1.75] font-normal">
             Upload two versions of an agreement. Get a ranked breakdown of every
             conflict — complete with balanced compromise language, risk ratings,
             and flags for human legal review.
@@ -129,11 +129,11 @@ export default function Home() {
           <div className="flex flex-wrap items-center gap-6 pt-2">
             <a
               href="#demo"
-              className="inline-flex items-center gap-2 py-3 px-6 bg-[#f0ede8] text-[#0c0c0c] text-[13px] font-medium rounded tracking-[0.02em] hover:bg-white transition-all shadow-[0_1px_3px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.06)] active:scale-[0.995]"
+              className="inline-flex items-center gap-2 py-3 px-6 bg-[#f1f5f9] text-[#0f172a] text-[13px] font-medium rounded tracking-[0.02em] hover:bg-white transition-all shadow-[0_1px_3px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.06)] active:scale-[0.995]"
             >
               Try it free →
             </a>
-            <div className="text-[12.5px] text-[#666] tracking-[0.02em] font-light">
+            <div className="text-[12.5px] text-[#94a3b8] tracking-[0.02em] font-normal">
               No account required · Instant analysis
             </div>
           </div>
@@ -145,44 +145,44 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="w-full h-[1px] bg-[#222222]" />
+      <div className="w-full h-[1px] bg-[#222838]" />
 
       {/* 2. Feature Strip / How it works */}
-      <section className="grid grid-cols-1 sm:grid-cols-3 border-b border-[#222222]">
-        <div className="p-8 sm:p-10 sm:border-r border-[#222222] border-b sm:border-b-0 hover:bg-[#0f0f0f] transition-colors duration-200">
-          <div className="text-[11px] text-[#555] tracking-[0.1em] mb-4 font-mono font-medium">
+      <section className="grid grid-cols-1 sm:grid-cols-3 border-b border-[#222838]">
+        <div className="p-8 sm:p-10 sm:border-r border-[#222838] border-b sm:border-b-0 hover:bg-[#12151f] transition-colors duration-200">
+          <div className="text-[11.5px] text-[#818cf8] tracking-[0.1em] mb-4 font-mono font-semibold">
             01
           </div>
-          <h3 className="font-serif text-[21px] font-normal text-[#f0ede8] mb-2 leading-[1.25]">
+          <h3 className="font-serif text-[21px] font-normal text-[#f8fafc] mb-2 leading-[1.25]">
             Clause extraction
           </h3>
-          <p className="text-[13px] text-[#666] leading-[1.6] font-light">
+          <p className="text-[13.5px] text-[#cbd5e1] leading-[1.65] font-normal">
             Parses both PDFs and identifies individual clauses across payment,
             liability, IP, and termination.
           </p>
         </div>
 
-        <div className="p-8 sm:p-10 sm:border-r border-[#222222] border-b sm:border-b-0 hover:bg-[#0f0f0f] transition-colors duration-200">
-          <div className="text-[11px] text-[#555] tracking-[0.1em] mb-4 font-mono font-medium">
+        <div className="p-8 sm:p-10 sm:border-r border-[#222838] border-b sm:border-b-0 hover:bg-[#12151f] transition-colors duration-200">
+          <div className="text-[11.5px] text-[#818cf8] tracking-[0.1em] mb-4 font-mono font-semibold">
             02
           </div>
-          <h3 className="font-serif text-[21px] font-normal text-[#f0ede8] mb-2 leading-[1.25]">
+          <h3 className="font-serif text-[21px] font-normal text-[#f8fafc] mb-2 leading-[1.25]">
             Conflict detection
           </h3>
-          <p className="text-[13px] text-[#666] leading-[1.6] font-light">
+          <p className="text-[13.5px] text-[#cbd5e1] leading-[1.65] font-normal">
             Surfaces every point of disagreement between the two versions,
             ranked from high to low risk.
           </p>
         </div>
 
-        <div className="p-8 sm:p-10 hover:bg-[#0f0f0f] transition-colors duration-200">
-          <div className="text-[11px] text-[#555] tracking-[0.1em] mb-4 font-mono font-medium">
+        <div className="p-8 sm:p-10 hover:bg-[#12151f] transition-colors duration-200">
+          <div className="text-[11.5px] text-[#818cf8] tracking-[0.1em] mb-4 font-mono font-semibold">
             03
           </div>
-          <h3 className="font-serif text-[21px] font-normal text-[#f0ede8] mb-2 leading-[1.25]">
+          <h3 className="font-serif text-[21px] font-normal text-[#f8fafc] mb-2 leading-[1.25]">
             Compromise drafting
           </h3>
-          <p className="text-[13px] text-[#666] leading-[1.6] font-light">
+          <p className="text-[13.5px] text-[#cbd5e1] leading-[1.65] font-normal">
             Generates balanced alternative language your legal team can use as
             a negotiation starting point.
           </p>
@@ -190,13 +190,13 @@ export default function Home() {
       </section>
 
       {/* 3. Demo Section */}
-      <section id="demo" className="bg-[#0f0f0f] border-b border-[#222222]">
-        <div className="px-6 sm:px-10 pt-10 sm:pt-12 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#1c1c1c] pb-5">
-          <div className="text-[11px] tracking-[0.12em] uppercase text-[#777] font-medium flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#185fa5]" />
+      <section id="demo" className="bg-[#11141d] border-b border-[#222838]">
+        <div className="px-6 sm:px-10 pt-10 sm:pt-12 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#222838] pb-5">
+          <div className="text-[11px] tracking-[0.12em] uppercase text-[#94a3b8] font-medium flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />
             Live Demo
           </div>
-          <div className="text-[12px] text-[#555] font-light">
+          <div className="text-[12.5px] text-[#94a3b8] font-normal">
             Upload two PDFs · Results in under 30 seconds
           </div>
         </div>
@@ -214,15 +214,15 @@ export default function Home() {
 
         {/* Error Notification */}
         {error && (
-          <div className="mx-6 sm:mx-10 mb-8 p-4 bg-[#1a0a0a] border border-[#2a1010] rounded space-y-3">
-            <span className="font-medium block text-[11px] uppercase tracking-wider text-[#cc4444]">
+          <div className="mx-6 sm:mx-10 mb-8 p-5 bg-[#241010] border border-[#521c1c] rounded-lg space-y-3">
+            <span className="font-medium block text-[11px] uppercase tracking-wider text-[#fca5a5]">
               Analysis Error
             </span>
-            <p className="text-[13px] text-[#aa4444] font-light leading-relaxed">{error}</p>
+            <p className="text-[13.5px] text-[#fca5a5] font-normal leading-relaxed">{error}</p>
             <button
               type="button"
               onClick={handleRetry}
-              className="inline-flex items-center gap-2 text-[12px] text-[#888] hover:text-[#f0ede8] transition-colors font-light border border-[#2a2a2a] hover:border-[#444] rounded px-3 py-1.5 cursor-pointer"
+              className="inline-flex items-center gap-2 text-[12px] text-[#cbd5e1] hover:text-white transition-colors font-normal border border-[#521c1c] hover:border-[#782828] rounded px-3 py-1.5 cursor-pointer bg-[#351515]"
             >
               ← Try again
             </button>
@@ -232,13 +232,13 @@ export default function Home() {
         {/* Results */}
         {result && (
           <div className="px-6 sm:px-10 pb-12 pt-6 space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#222222] pb-4 gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#222838] pb-4 gap-3">
               <div>
-                <div className="text-[11px] tracking-[0.12em] uppercase text-[#777] font-medium">
+                <div className="text-[11.5px] tracking-[0.12em] uppercase text-[#e2e8f0] font-medium">
                   Analysis Output — {sortedConflicts.length}{" "}
                   {sortedConflicts.length === 1 ? "conflict" : "conflicts"} detected
                 </div>
-                <div className="text-[11px] text-[#555] font-light">
+                <div className="text-[11.5px] text-[#94a3b8] font-normal">
                   Ranked by risk level
                 </div>
               </div>
@@ -247,10 +247,10 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={handleCopyReport}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11.5px] text-[#888] hover:text-[#f0ede8] border border-[#262626] hover:border-[#444] rounded bg-[#141414] transition-all cursor-pointer font-light"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11.5px] text-[#cbd5e1] hover:text-[#f8fafc] border border-[#282f42] hover:border-[#3e485e] rounded bg-[#161a25] transition-all cursor-pointer font-normal"
                   title="Copy full analysis report as Markdown"
                 >
-                  <svg className="w-3.5 h-3.5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-[#94a3b8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                   </svg>
                   <span>{copiedReport ? "Report Copied ✓" : "Copy Report"}</span>
@@ -259,10 +259,10 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={handleDownloadReport}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11.5px] text-[#888] hover:text-[#f0ede8] border border-[#262626] hover:border-[#444] rounded bg-[#141414] transition-all cursor-pointer font-light"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11.5px] text-[#cbd5e1] hover:text-[#f8fafc] border border-[#282f42] hover:border-[#3e485e] rounded bg-[#161a25] transition-all cursor-pointer font-normal"
                   title="Download full analysis report as Markdown file"
                 >
-                  <svg className="w-3.5 h-3.5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-[#94a3b8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                   <span>Export .md</span>
@@ -271,22 +271,22 @@ export default function Home() {
             </div>
 
             {/* Negotiation Summary */}
-            <div className="p-5 bg-[#121212] border border-[#222222] rounded-lg space-y-1.5">
-              <div className="text-[10px] uppercase tracking-[0.1em] text-[#666] font-medium flex items-center gap-1.5">
+            <div className="p-5 sm:p-6 bg-[#151824] border border-[#282f42] rounded-lg space-y-2">
+              <div className="text-[11px] uppercase tracking-[0.1em] text-[#94a3b8] font-semibold flex items-center gap-1.5">
                 <span>Executive Summary</span>
               </div>
-              <p className="text-[13px] text-[#bbb] leading-[1.6] font-light">
+              <p className="text-[14px] text-[#e2e8f0] leading-[1.7] font-normal">
                 {result.summary}
               </p>
             </div>
 
             {/* Conflict Rows */}
             {sortedConflicts.length === 0 ? (
-              <div className="p-8 bg-[#121212] border border-[#222222] rounded-lg text-center text-[13px] text-[#666] font-light">
+              <div className="p-8 bg-[#151824] border border-[#282f42] rounded-lg text-center text-[13.5px] text-[#94a3b8] font-normal">
                 No direct conflicting clauses detected between the two contracts.
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 {sortedConflicts.map((conflict, index) => (
                   <ConflictCard key={index} conflict={conflict} />
                 ))}
@@ -299,32 +299,32 @@ export default function Home() {
       {/* 4. Social Proof */}
       <section className="px-6 sm:px-10 py-12 flex flex-wrap items-center justify-between gap-8">
         <div className="flex flex-col gap-1 min-w-[140px]">
-          <div className="font-serif text-[34px] text-[#f0ede8] font-normal leading-none">
+          <div className="font-serif text-[34px] text-[#f8fafc] font-normal leading-none">
             &lt; 30s
           </div>
-          <div className="text-[12px] text-[#555] font-light">
+          <div className="text-[12.5px] text-[#94a3b8] font-normal">
             Average analysis time
           </div>
         </div>
 
-        <div className="hidden sm:block w-[1px] h-10 bg-[#222222]" />
+        <div className="hidden sm:block w-[1px] h-10 bg-[#222838]" />
 
         <div className="flex flex-col gap-1 min-w-[140px]">
-          <div className="font-serif text-[34px] text-[#f0ede8] font-normal leading-none">
+          <div className="font-serif text-[34px] text-[#f8fafc] font-normal leading-none">
             Free
           </div>
-          <div className="text-[12px] text-[#555] font-light">
+          <div className="text-[12.5px] text-[#94a3b8] font-normal">
             No signup or credit card
           </div>
         </div>
 
-        <div className="hidden sm:block w-[1px] h-10 bg-[#222222]" />
+        <div className="hidden sm:block w-[1px] h-10 bg-[#222838]" />
 
         <div className="flex flex-col gap-1 min-w-[140px]">
-          <div className="font-serif text-[34px] text-[#f0ede8] font-normal leading-none">
+          <div className="font-serif text-[34px] text-[#f8fafc] font-normal leading-none">
             Gemini 3.6
           </div>
-          <div className="text-[12px] text-[#555] font-light">
+          <div className="text-[12.5px] text-[#94a3b8] font-normal">
             Google deep reasoning AI
           </div>
         </div>

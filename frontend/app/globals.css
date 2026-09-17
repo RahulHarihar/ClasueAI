@@ -11,8 +11,8 @@
 }
 
 body {
-  background: #080808;
-  color: #f0ede8;
+  background: #0b0d13;
+  color: #f1f5f9;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,11 +26,11 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-/* Checked pattern with tiny squares — crisper, higher contrast */
+/* Checked pattern with tiny squares — soft, elegant ambiance */
 .bg-grid-squares {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 

@@ -23,19 +23,19 @@ export default function ConflictCard({ conflict }: ConflictCardProps) {
   const getRiskStyles = (level: Conflict["riskLevel"]) => {
     switch (level) {
       case "high":
-        return "bg-[#1a0a0a] text-[#e05252] border border-[#331414]";
+        return "bg-[#371616] text-[#fca5a5] border border-[#7f1d1d]";
       case "medium":
-        return "bg-[#1a1200] text-[#d99014] border border-[#332200]";
+        return "bg-[#33220a] text-[#fcd34d] border border-[#78480b]";
       case "low":
       default:
-        return "bg-[#0a1a0a] text-[#4ea84e] border border-[#123312]";
+        return "bg-[#132d1d] text-[#86efac] border border-[#166534]";
     }
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] border border-[#1a1a1a] hover:border-[#262626] transition-colors rounded-lg overflow-hidden bg-[#0c0c0c]">
+    <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] border border-[#282e3d] hover:border-[#3d465c] transition-colors rounded-lg overflow-hidden bg-[#141824] shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
       {/* Sidebar */}
-      <div className="p-6 bg-[#101010] border-b md:border-b-0 md:border-r border-[#1a1a1a] flex flex-col justify-between gap-4">
+      <div className="p-6 bg-[#161a26] border-b md:border-b-0 md:border-r border-[#282e3d] flex flex-col justify-between gap-4">
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-1.5">
             <span
@@ -46,38 +46,38 @@ export default function ConflictCard({ conflict }: ConflictCardProps) {
               {conflict.riskLevel} risk
             </span>
             {conflict.requiresLegalReview && (
-              <span className="text-[10px] tracking-[0.08em] uppercase py-1 px-2 rounded-[2px] font-medium inline-block w-fit bg-[#140e24] text-[#b388ff] border border-[#2b1852]">
+              <span className="text-[10px] tracking-[0.08em] uppercase py-1 px-2 rounded-[2px] font-medium inline-block w-fit bg-[#241a44] text-[#c4b5fd] border border-[#4c2889]">
                 Legal Review
               </span>
             )}
           </div>
-          <h3 className="font-serif text-[17px] text-[#f0ede8] leading-[1.3] font-normal tracking-tight">
+          <h3 className="font-serif text-[18px] text-[#f8fafc] leading-[1.3] font-normal tracking-tight">
             {conflict.topic}
           </h3>
         </div>
 
-        <div className="text-[10px] text-[#444] uppercase tracking-[0.06em] hidden md:block">
+        <div className="text-[11px] text-[#94a3b8] uppercase tracking-[0.08em] font-medium hidden md:block">
           Clause Analysis
         </div>
       </div>
 
       {/* Body */}
-      <div className="p-6 flex flex-col gap-3.5 bg-[#0c0c0c]">
+      <div className="p-6 flex flex-col gap-3.5 bg-[#12151f]">
         {/* Clauses Comparison */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          <div className="bg-[#0e0e0e] border border-[#181818] rounded-md p-3.5 space-y-1.5">
-            <div className="text-[10px] text-[#555] tracking-[0.08em] uppercase font-medium">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="bg-[#181d28] border border-[#282f42] rounded-md p-4 space-y-2">
+            <div className="text-[10.5px] text-[#94a3b8] tracking-[0.08em] uppercase font-medium">
               Party A Version
             </div>
-            <p className="text-[12.5px] text-[#888] leading-[1.6] font-light">
+            <p className="text-[13px] text-[#cbd5e1] leading-[1.65] font-normal">
               {conflict.partyA}
             </p>
           </div>
-          <div className="bg-[#0e0e0e] border border-[#181818] rounded-md p-3.5 space-y-1.5">
-            <div className="text-[10px] text-[#555] tracking-[0.08em] uppercase font-medium">
+          <div className="bg-[#181d28] border border-[#282f42] rounded-md p-4 space-y-2">
+            <div className="text-[10.5px] text-[#94a3b8] tracking-[0.08em] uppercase font-medium">
               Party B Version
             </div>
-            <p className="text-[12.5px] text-[#888] leading-[1.6] font-light">
+            <p className="text-[13px] text-[#cbd5e1] leading-[1.65] font-normal">
               {conflict.partyB}
             </p>
           </div>
@@ -85,8 +85,8 @@ export default function ConflictCard({ conflict }: ConflictCardProps) {
 
         {/* Conflict description */}
         {conflict.conflict && (
-          <div className="px-1 text-[12px] text-[#666] leading-[1.6] font-light">
-            <span className="text-[10px] text-[#444] uppercase tracking-[0.08em] mr-2 font-medium">
+          <div className="bg-[#181c28] border border-[#282e3e] rounded-md px-4 py-3 text-[13px] text-[#e2e8f0] leading-[1.65]">
+            <span className="text-[10.5px] text-[#93c5fd] uppercase tracking-[0.08em] mr-2 font-medium">
               The Issue:
             </span>
             {conflict.conflict}
@@ -94,31 +94,31 @@ export default function ConflictCard({ conflict }: ConflictCardProps) {
         )}
 
         {/* Compromise */}
-        <div className="bg-[#071207] border border-[#112411] rounded-md p-4 flex flex-col gap-2">
+        <div className="bg-[#0d261c] border border-[#1b5037] rounded-md p-4 flex flex-col gap-2.5">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-[#3e783e] tracking-[0.08em] uppercase font-medium flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#3e783e]" />
+            <span className="text-[11px] text-[#6ee7b7] tracking-[0.08em] uppercase font-medium flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#34d399]" />
               Suggested Compromise
             </span>
             <button
               type="button"
               onClick={handleCopy}
-              className="text-[11px] text-[#4e8c4e] hover:text-[#78b378] transition-colors flex items-center gap-1.5 cursor-pointer font-light px-2 py-0.5 rounded bg-[#0d210d]/50 hover:bg-[#0d210d]"
+              className="text-[11.5px] text-[#a7f3d0] hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer font-normal px-2.5 py-1 rounded bg-[#133c2a] hover:bg-[#1a4d37] border border-[#22573d]"
             >
               {copied ? (
                 <>
-                  <span className="text-[#78b378]">✓</span>
+                  <span className="text-[#34d399]">✓</span>
                   <span>Copied to clipboard</span>
                 </>
               ) : (
                 <>
                   <span>Copy clause</span>
-                  <span className="text-[10px] text-[#3e783e]">↗</span>
+                  <span className="text-[11px] text-[#6ee7b7]">↗</span>
                 </>
               )}
             </button>
           </div>
-          <p className="text-[12.5px] text-[#78b378] leading-[1.6] font-light">
+          <p className="text-[13px] text-[#d1fae5] leading-[1.65] font-normal">
             {conflict.compromise}
           </p>
         </div>
