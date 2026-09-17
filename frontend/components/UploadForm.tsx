@@ -120,20 +120,20 @@ export default function UploadForm({
         }}
         onDragLeave={() => setIsDraggingA(false)}
         onDrop={handleDropA}
-        className={`bg-[#151824] border rounded-lg p-6 cursor-pointer transition-all duration-200 flex flex-col justify-between group ${
+        className={`bg-[#141414] border rounded-lg p-6 cursor-pointer transition-all duration-200 flex flex-col justify-between group ${
           isDraggingA
-            ? "border-[#38bdf8] bg-[#162032]"
+            ? "border-[#c5a059] bg-[#1c1913]"
             : contractA
-            ? "border-[#333c52] hover:border-[#475569]"
-            : "border-[#252c3d] hover:border-[#38435c]"
+            ? "border-[#30302c] hover:border-[#42423d]"
+            : "border-[#242422] hover:border-[#383835]"
         }`}
       >
         <div className="flex items-center justify-between mb-4">
-          <span className="text-[10.5px] tracking-[0.1em] uppercase text-[#94a3b8] font-medium">
+          <span className="text-[10.5px] tracking-[0.1em] uppercase text-[#9e998e] font-medium">
             Your contract — Party A
           </span>
           {contractA && (
-            <span className="inline-flex items-center gap-1.5 text-[10.5px] tracking-[0.05em] text-[#86efac] bg-[#142e1d] border border-[#166534] px-2.5 py-0.5 rounded font-medium">
+            <span className="inline-flex items-center gap-1.5 text-[10.5px] tracking-[0.05em] text-[#86efac] bg-[#0c1f12] border border-[#1b4d29] px-2.5 py-0.5 rounded font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" />
               Loaded
             </span>
@@ -143,28 +143,28 @@ export default function UploadForm({
         <div
           className={`flex flex-col items-center justify-center min-h-[90px] py-4 border border-dashed rounded transition-colors gap-2 mb-3 ${
             isDraggingA
-              ? "border-[#38bdf8] bg-[#162032]"
+              ? "border-[#c5a059] bg-[#211d15]"
               : contractA
-              ? "border-[#333c52] bg-[#171b28]"
-              : "border-[#2a3245] bg-[#121520] group-hover:border-[#38435d]"
+              ? "border-[#30302c] bg-[#181818]"
+              : "border-[#222220] bg-[#0f0f0f] group-hover:border-[#333330]"
           }`}
         >
           <span className="text-xl opacity-85 group-hover:opacity-100 transition-opacity">
             {contractA ? "📑" : "📄"}
           </span>
-          <span className="text-[13px] text-[#cbd5e1] text-center px-3 truncate max-w-full font-normal">
+          <span className="text-[13px] text-[#d4d0c7] text-center px-3 truncate max-w-full font-normal">
             {contractA ? contractA.name : "Drop PDF or click to browse"}
           </span>
         </div>
 
-        <div className="flex items-center justify-between text-[11.5px] text-[#94a3b8] tracking-wide font-normal">
+        <div className="flex items-center justify-between text-[11.5px] text-[#9e998e] tracking-wide font-normal">
           <span>
             {contractA
               ? `${(contractA.size / (1024 * 1024)).toFixed(2)} MB · PDF`
               : "PDF · Max 10MB"}
           </span>
           {contractA && (
-            <span className="text-[11.5px] text-[#cbd5e1] hover:text-[#f8fafc] transition-colors">
+            <span className="text-[11.5px] text-[#c5a059] hover:text-[#dfbe82] transition-colors">
               Replace
             </span>
           )}
@@ -180,20 +180,20 @@ export default function UploadForm({
         }}
         onDragLeave={() => setIsDraggingB(false)}
         onDrop={handleDropB}
-        className={`bg-[#151824] border rounded-lg p-6 cursor-pointer transition-all duration-200 flex flex-col justify-between group ${
+        className={`bg-[#141414] border rounded-lg p-6 cursor-pointer transition-all duration-200 flex flex-col justify-between group ${
           isDraggingB
-            ? "border-[#38bdf8] bg-[#162032]"
+            ? "border-[#c5a059] bg-[#1c1913]"
             : contractB
-            ? "border-[#333c52] hover:border-[#475569]"
-            : "border-[#252c3d] hover:border-[#38435c]"
+            ? "border-[#30302c] hover:border-[#42423d]"
+            : "border-[#242422] hover:border-[#383835]"
         }`}
       >
         <div className="flex items-center justify-between mb-4">
-          <span className="text-[10.5px] tracking-[0.1em] uppercase text-[#94a3b8] font-medium">
+          <span className="text-[10.5px] tracking-[0.1em] uppercase text-[#9e998e] font-medium">
             Counterparty contract — Party B
           </span>
           {contractB && (
-            <span className="inline-flex items-center gap-1.5 text-[10.5px] tracking-[0.05em] text-[#86efac] bg-[#142e1d] border border-[#166534] px-2.5 py-0.5 rounded font-medium">
+            <span className="inline-flex items-center gap-1.5 text-[10.5px] tracking-[0.05em] text-[#86efac] bg-[#0c1f12] border border-[#1b4d29] px-2.5 py-0.5 rounded font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" />
               Loaded
             </span>
@@ -203,28 +203,28 @@ export default function UploadForm({
         <div
           className={`flex flex-col items-center justify-center min-h-[90px] py-4 border border-dashed rounded transition-colors gap-2 mb-3 ${
             isDraggingB
-              ? "border-[#38bdf8] bg-[#162032]"
+              ? "border-[#c5a059] bg-[#211d15]"
               : contractB
-              ? "border-[#333c52] bg-[#171b28]"
-              : "border-[#2a3245] bg-[#121520] group-hover:border-[#38435d]"
+              ? "border-[#30302c] bg-[#181818]"
+              : "border-[#222220] bg-[#0f0f0f] group-hover:border-[#333330]"
           }`}
         >
           <span className="text-xl opacity-85 group-hover:opacity-100 transition-opacity">
             {contractB ? "📑" : "📄"}
           </span>
-          <span className="text-[13px] text-[#cbd5e1] text-center px-3 truncate max-w-full font-normal">
+          <span className="text-[13px] text-[#d4d0c7] text-center px-3 truncate max-w-full font-normal">
             {contractB ? contractB.name : "Drop PDF or click to browse"}
           </span>
         </div>
 
-        <div className="flex items-center justify-between text-[11.5px] text-[#94a3b8] tracking-wide font-normal">
+        <div className="flex items-center justify-between text-[11.5px] text-[#9e998e] tracking-wide font-normal">
           <span>
             {contractB
               ? `${(contractB.size / (1024 * 1024)).toFixed(2)} MB · PDF`
               : "PDF · Max 10MB"}
           </span>
           {contractB && (
-            <span className="text-[11.5px] text-[#cbd5e1] hover:text-[#f8fafc] transition-colors">
+            <span className="text-[11.5px] text-[#c5a059] hover:text-[#dfbe82] transition-colors">
               Replace
             </span>
           )}
@@ -235,7 +235,7 @@ export default function UploadForm({
       <button
         type="submit"
         disabled={isLoading || !contractA || !contractB}
-        className="col-span-1 sm:col-span-2 bg-[#f8fafc] text-[#0f172a] border-0 py-3.5 px-6 rounded text-[13px] font-medium tracking-[0.02em] cursor-pointer hover:bg-white transition-all shadow-[0_1px_3px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.06)] active:scale-[0.995] disabled:opacity-30 disabled:cursor-not-allowed mt-2 flex items-center justify-center gap-2"
+        className="col-span-1 sm:col-span-2 bg-[#f0ede8] text-[#0c0c0c] border-0 py-3.5 px-6 rounded text-[13px] font-medium tracking-[0.02em] cursor-pointer hover:bg-white transition-all shadow-[0_1px_3px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.06)] active:scale-[0.995] disabled:opacity-30 disabled:cursor-not-allowed mt-2 flex items-center justify-center gap-2"
       >
         {isLoading ? (
           <>
