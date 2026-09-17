@@ -14,6 +14,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [copiedReport, setCopiedReport] = useState(false);
+
   const handleStartLoading = () => {
     setLoading(true);
     setError(null);
@@ -25,9 +27,68 @@ export default function Home() {
     setLoading(false);
   };
 
+  const handleRetry = () => {
+    setError(null);
+    setResult(null);
+    setLoading(false);
+  };
+
   const handleError = (errorMessage: string) => {
     setError(errorMessage);
     setLoading(false);
+  };
+
+  const generateMarkdownReport = (data: AnalysisResult): string => {
+    const lines = [
+      "# Contract Negotiation Analysis Report",
+      `*Generated via Contract Intelligence (Gemini AI) on ${new Date().toLocaleDateString()}*`,
+      "",
+      "## Executive Summary",
+      data.summary,
+      "",
+      `## Identified Conflicts (${data.conflicts.length})`,
+      "",
+    ];
+
+    data.conflicts.forEach((c, idx) => {
+      lines.push(`### ${idx + 1}. ${c.topic} [Risk: ${c.riskLevel.toUpperCase()}]`);
+      if (c.requiresLegalReview) {
+        lines.push("> ⚠️ **Flag:** Formal legal counsel review recommended for this clause.\n");
+      }
+      lines.push(`**Party A Clause:**\n> ${c.partyA}\n`);
+      lines.push(`**Party B Clause:**\n> ${c.partyB}\n`);
+      lines.push(`**Conflict Analysis:**\n${c.conflict}\n`);
+      lines.push(`**Proposed Compromise Language:**\n\`\`\`\n${c.compromise}\n\`\`\`\n`);
+      lines.push("---\n");
+    });
+
+    return lines.join("\n");
+  };
+
+  const handleCopyReport = async () => {
+    if (!result) return;
+    try {
+      const md = generateMarkdownReport(result);
+      await navigator.clipboard.writeText(md);
+      setCopiedReport(true);
+      setTimeout(() => setCopiedReport(false), 2000);
+    } catch {
+      // Fallback if clipboard API fails
+    }
+  };
+
+  const handleDownloadReport = () => {
+    if (!result) return;
+    const md = generateMarkdownReport(result);
+    const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `contract-analysis-${Date.now()}.md`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const sortedConflicts = result
@@ -153,24 +214,59 @@ export default function Home() {
 
         {/* Error Notification */}
         {error && (
-          <div className="mx-6 sm:mx-10 mb-8 p-4 bg-[#1a0a0a] border border-[#2a1010] rounded text-[13px] text-[#cc4444] space-y-1">
-            <span className="font-medium block text-[11px] uppercase tracking-wider">
+          <div className="mx-6 sm:mx-10 mb-8 p-4 bg-[#1a0a0a] border border-[#2a1010] rounded space-y-3">
+            <span className="font-medium block text-[11px] uppercase tracking-wider text-[#cc4444]">
               Analysis Error
             </span>
-            <p className="text-[#aa4444] font-light leading-relaxed">{error}</p>
+            <p className="text-[13px] text-[#aa4444] font-light leading-relaxed">{error}</p>
+            <button
+              type="button"
+              onClick={handleRetry}
+              className="inline-flex items-center gap-2 text-[12px] text-[#888] hover:text-[#f0ede8] transition-colors font-light border border-[#2a2a2a] hover:border-[#444] rounded px-3 py-1.5 cursor-pointer"
+            >
+              ← Try again
+            </button>
           </div>
         )}
 
         {/* Results */}
         {result && (
           <div className="px-6 sm:px-10 pb-12 pt-6 space-y-6">
-            <div className="flex items-center justify-between border-b border-[#222222] pb-4">
-              <div className="text-[11px] tracking-[0.12em] uppercase text-[#777] font-medium">
-                Analysis Output — {sortedConflicts.length}{" "}
-                {sortedConflicts.length === 1 ? "conflict" : "conflicts"} detected
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#222222] pb-4 gap-3">
+              <div>
+                <div className="text-[11px] tracking-[0.12em] uppercase text-[#777] font-medium">
+                  Analysis Output — {sortedConflicts.length}{" "}
+                  {sortedConflicts.length === 1 ? "conflict" : "conflicts"} detected
+                </div>
+                <div className="text-[11px] text-[#555] font-light">
+                  Ranked by risk level
+                </div>
               </div>
-              <div className="text-[11px] text-[#555] font-light">
-                Ranked by risk level
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleCopyReport}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11.5px] text-[#888] hover:text-[#f0ede8] border border-[#262626] hover:border-[#444] rounded bg-[#141414] transition-all cursor-pointer font-light"
+                  title="Copy full analysis report as Markdown"
+                >
+                  <svg className="w-3.5 h-3.5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                  </svg>
+                  <span>{copiedReport ? "Report Copied ✓" : "Copy Report"}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleDownloadReport}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11.5px] text-[#888] hover:text-[#f0ede8] border border-[#262626] hover:border-[#444] rounded bg-[#141414] transition-all cursor-pointer font-light"
+                  title="Download full analysis report as Markdown file"
+                >
+                  <svg className="w-3.5 h-3.5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  <span>Export .md</span>
+                </button>
               </div>
             </div>
 

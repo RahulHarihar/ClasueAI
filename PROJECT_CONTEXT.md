@@ -149,38 +149,37 @@ type AnalysisResult = {
 
 ## Edge Cases Backlog
 
-These are known issues not yet fixed. Fix them in priority order when scope allows:
+All identified edge cases from MVP audit are now resolved:
 
-| Priority | Issue | Location |
-|---|---|---|
-| ~~P0~~ | ~~Fallback loop throws instead of continues~~ | ~~groqService.ts~~ — **FIXED** (migrated to geminiService.ts) |
-| P1 | JSON.parse of Gemini response not wrapped in try/catch | index.ts |
-| P1 | Empty Gemini response not guarded | geminiService.ts |
-| P2 | No user-facing error when PDF has no extractable text | pdfParser.ts + index.ts |
-| P2 | No file size limit enforced on upload | index.ts |
-| P3 | No loading state feedback beyond button text | frontend.tsx |
-| P3 | No retry button on error | frontend.tsx |
-| P3 | No skeleton loaders | frontend.tsx |
+| Priority | Issue | Location | Status |
+|---|---|---|---|
+| ~~P0~~ | Fallback loop throws instead of continues | `geminiService.ts` | **FIXED** |
+| ~~P1~~ | JSON.parse of Gemini response not wrapped in try/catch | `backend/index.ts` | **FIXED** |
+| ~~P1~~ | Empty Gemini response not guarded | `backend/services/geminiService.ts` | **FIXED** |
+| ~~P2~~ | No user-facing error when PDF has no extractable text | `backend/index.ts` | **FIXED** |
+| ~~P2~~ | No file size limit enforced on upload (10 MB cap) | `backend/index.ts` | **FIXED** |
+| ~~P3~~ | Progressive loading feedback & skeleton loaders | `LoadingState.tsx` | **FIXED** |
+| ~~P3~~ | Retry button on error notification | `frontend/app/page.tsx` | **FIXED** |
+| ~~P3~~ | Copy individual compromise to clipboard | `ConflictCard.tsx` | **FIXED** |
+| ~~P3~~ | Export analysis report as Markdown (.md) & copy report | `frontend/app/page.tsx` | **FIXED** |
 
 ---
 
 ## Planned Features (Roadmap)
 
-These are not yet built. Build them in order after the MVP is stable:
+### Phase 2 — Polish (Completed ✅)
+- [x] Skeleton loaders + progressive multi-stage analysis indicator
+- [x] Retry button on error
+- [x] Copy to clipboard button on compromise suggestions
+- [x] Export results as Markdown (.md) and copy full report
 
-### Phase 2 — Polish (for Genie AI demo)
-- Skeleton loaders instead of spinner text
-- Retry button on error
-- Clause count shown before analysis starts
-- Copy to clipboard button on compromise suggestions
-- Export results as PDF or markdown
-
-### Phase 3 — India Market Features
+### Phase 3 — India Market Features (Next)
 - Single contract review mode (upload one contract, get risk analysis)
 - Plain English explanation of each clause in Indian legal context
 - TDS and GST clause detection and validation
 - Indian jurisdiction selector (affects how risk is assessed)
 - WhatsApp share button for results
+
 
 ### Phase 4 — Product Features
 - User accounts and saved contract history
